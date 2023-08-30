@@ -21,12 +21,14 @@ function Login() {
 
   return (
     <div className="login-container">
-      <form action="">
+      <img src="src/images/trybetunes_logo.svg" alt="" />
+      <form action="" className="form">
         <input
           type="text"
           data-testid="login-name-input"
           value={ login }
           onChange={ ({ target }) => setLogin(target.value) }
+          placeholder="Nome"
         />
         <button
           data-testid="login-submit-button"
