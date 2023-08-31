@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { AlbumType } from '../../types';
 
-function AlbumCard({ artistId, artistName, artworkUrl100, collectionId,
+function AlbumCard({ artistName, artworkUrl100, collectionId,
   collectionName, collectionPrice, releaseDate, trackCount }:AlbumType) {
   return (
     <div className="album-card">
