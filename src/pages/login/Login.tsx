@@ -21,7 +21,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <img src="src/images/trybetunes_logo.svg" alt="" />
+      <img src="src/images/trybetunes_logo.svg" alt="Trybetunes logo" />
       <form action="" className="form">
         <input
           type="text"

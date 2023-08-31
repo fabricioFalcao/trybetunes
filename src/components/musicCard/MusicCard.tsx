@@ -1,6 +1,12 @@
+import { useState } from 'react';
 import { SongType } from '../../types';
+import checkedHeart from '../../images/checked_heart.png';
+import uncheckedHeart from '../../images/empty_heart.png';
 
-function MusicCard({ previewUrl, trackName }: SongType) {
+function MusicCard({ previewUrl, trackName, trackId }: SongType) {
+  const [favorite, setFavorite] = useState<boolean>(false);
+  console.log(favorite);
+
   return (
     <div>
       <p>{trackName}</p>
@@ -8,10 +14,22 @@ function MusicCard({ previewUrl, trackName }: SongType) {
         <track kind="captions" />
         O seu navegador não suporta o elemento
         {' '}
-        {' '}
         <code>audio</code>
         .
       </audio>
+      <div>
+        <label
+          data-testid={ `checkbox-music-${trackId}` }
+        >
+          {favorite
+            ? (<img src={ checkedHeart } alt="favorite" />)
+            : (<img src={ uncheckedHeart } alt="favorite" />)}
+          <input
+            type="checkbox"
+            onChange={ () => setFavorite(!favorite) }
+          />
+        </label>
+      </div>
     </div>
   );
 }
