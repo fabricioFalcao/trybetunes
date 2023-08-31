@@ -33,7 +33,7 @@ function Search() {
   };
 
   if (carregando) {
-    return (<Carregando />);
+    return <Carregando />;
   }
 
   return (
@@ -57,18 +57,25 @@ function Search() {
           </button>
         </form>
       </div>
-      {renderSearch
-      && <div>
-        {albums.length
-          ? <section>
-            <h3>{`Resultado de álbuns de: ${artist}`}</h3>
-            <div className="albums-panel">
-              {albums.map((album) => (
-                <AlbumCard { ...album } key={ album.collectionId } />))}
-            </div>
-          </section>
-          : <h1>Nenhum álbum foi encontrado</h1>}
-         </div>}
+
+      <section>
+        {renderSearch && (
+          <div>
+            {albums.length ? (
+              <section>
+                <h3>{`Resultado de álbuns de: ${artist}`}</h3>
+                <div className="albums-panel">
+                  {albums.map((album) => (
+                    <AlbumCard { ...album } key={ album.collectionId } />
+                  ))}
+                </div>
+              </section>
+            ) : (
+              <h1>Nenhum álbum foi encontrado</h1>
+            )}
+          </div>
+        )}
+      </section>
     </>
   );
 }
