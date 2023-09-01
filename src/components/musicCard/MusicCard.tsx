@@ -4,9 +4,15 @@ import checkedHeart from '../../images/checked_heart.png';
 import uncheckedHeart from '../../images/empty_heart.png';
 import { addSong, removeSong } from '../../services/favoriteSongsAPI';
 
-function MusicCard({ previewUrl, trackName, trackId }: SongType) {
+type MusicCardProps = {
+  trackId: number,
+  trackName: string,
+  previewUrl: string,
+  favoriteSongs: SongType[]
+};
+
+function MusicCard({ previewUrl, trackName, trackId, favoriteSongs }: MusicCardProps) {
   const [favorite, setFavorite] = useState<boolean>(false);
-  console.log(favorite);
 
   const songData = {
     trackId,
@@ -15,12 +21,20 @@ function MusicCard({ previewUrl, trackName, trackId }: SongType) {
   };
 
   useEffect(() => {
-    if (favorite) {
+    const isFavorite = favoriteSongs.find((song) => song.trackId === trackId);
+    if (isFavorite !== undefined) {
+      setFavorite(true);
+    }
+  }, []);
+
+  const handleChange = () => {
+    setFavorite(!favorite);
+    if (!favorite) {
       addSong(songData);
     } else {
       removeSong(songData);
     }
-  }, [favorite]);
+  };
 
   return (
     <div>
@@ -41,7 +55,7 @@ function MusicCard({ previewUrl, trackName, trackId }: SongType) {
             : (<img src={ uncheckedHeart } alt="favorite" />)}
           <input
             type="checkbox"
-            onChange={ () => setFavorite(!favorite) }
+            onChange={ handleChange }
             checked={ favorite }
             style={ { opacity: '0' } }
           />
