@@ -1,11 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SongType } from '../../types';
 import checkedHeart from '../../images/checked_heart.png';
 import uncheckedHeart from '../../images/empty_heart.png';
+import { addSong, removeSong } from '../../services/favoriteSongsAPI';
 
 function MusicCard({ previewUrl, trackName, trackId }: SongType) {
   const [favorite, setFavorite] = useState<boolean>(false);
   console.log(favorite);
+
+  const songData = {
+    trackId,
+    trackName,
+    previewUrl,
+  };
+
+  useEffect(() => {
+    if (favorite) {
+      addSong(songData);
+    } else {
+      removeSong(songData);
+    }
+  }, [favorite]);
 
   return (
     <div>
@@ -27,6 +42,8 @@ function MusicCard({ previewUrl, trackName, trackId }: SongType) {
           <input
             type="checkbox"
             onChange={ () => setFavorite(!favorite) }
+            checked={ favorite }
+            style={ { opacity: '0' } }
           />
         </label>
       </div>
