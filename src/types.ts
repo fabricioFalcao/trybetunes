@@ -21,3 +21,5 @@ export type SongType = {
   trackName: string,
   previewUrl: string,
 };
+
+export type SetStateType = React.Dispatch<React.SetStateAction<string>>;
