@@ -27,6 +27,7 @@ function Profile() {
         data-testid="profile-image"
         src={ user?.image }
         alt="Imagem do usuário"
+        height="300px"
       />
       <br />
       <div>
